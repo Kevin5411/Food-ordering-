@@ -35,6 +35,48 @@ function App() {
     dispatch(signout());
   };
 
+  //sidebar
+  const [sidebarIsOpen, setSidebarIsOpen] = useState(false);
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const { data } = await axios.get(`/api/menus/categories`);
+        setCategories(data);
+      } catch (err) {
+        // toast.error(getError(err));
+      }
+    };
+    fetchCategories();
+  }, []);
+
+   return(
+       <BrowserRouter>
+       <div
+        className={
+          sidebarIsOpen
+            ? 'd-flex flex-column site-container active-cont'
+            : 'd-flex flex-column site-container'
+        }
+        
+      ></div>
+
+ 
+        
+         
+      <header className="row">
+        <div>
+        <Navbar bg="dark" variant="dark" expand="lg">
+        <Container></Container>
+            <Button 
+              variant="dark"
+              onClick={() => setSidebarIsOpen(!sidebarIsOpen)}
+            >
+              <i className="fas fa-bars"></i>
+            </Button>
+
+
    return(
        <BrowserRouter>
 <div className="grid-container">
